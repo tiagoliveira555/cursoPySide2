@@ -2,20 +2,32 @@ def limpar_tela():
     print("\n" * 130)
 
 
-def cadastrar_cliente():
-    limpar_tela()
-    print('Cadastrando....')
+def cadastrar_cliente(nome, endereco, cpf):
+    global Nomes, Enderecos, Cpfs
+    print('CADASTRANDO >>>>>>\n')
+
+    Nomes.append(nome)
+    Enderecos.append(endereco)
+    Cpfs.append(cpf)
+
+    print(f'Cliente {nome} cadastrado com sucesso!')
     input('[ENTER] para continuar...')
 
 
-def exibir_cliente():
-    limpar_tela()
-    print('Relatório....')
+def exibir_clientes():
+    global Nomes, Enderecos, Cpfs
+    print('RELATÓRIO >>>>>\n')
+
+    for p in range(len(Nomes)):
+        print(f'Nome     : {Nomes[p]}')
+        print(f'Endereços: {Enderecos[p]}')
+        print(f'CPF      : {Cpfs[p]}')
+        print('________________________________________')
+
     input('[ENTER] para continuar...')
 
 
 def pesquisar_cliente():
-    limpar_tela()
     print('Pesquisando....')
     input('[ENTER] para continuar...')
 
@@ -37,15 +49,19 @@ def validar_usuario(us, pw):
         return True
 
     return False
+# ====================================================
 
+
+Nomes = []
+Enderecos = []
+Cpfs = []
 
 print(f'{">> SYSCAD <<":=^40}')
-login = input('Usuário: ')
-senha = input('Senha: ')
+# login = input('Usuário: ')
+# senha = input('Senha: ')
 
-if validar_usuario(login, senha):
+if True: # validar_usuario(login, senha):
     while True:
-        limpar_tela()
         print('|================ MENU ================|')
         print('| [1] - CADASTRAR                      |')
         print('| [2] - RELATORIO                      |')
@@ -58,10 +74,15 @@ if validar_usuario(login, senha):
         if op == '0':
             print('Fim do sistema....')
             break
+
         elif op == '1':
-            cadastrar_cliente()
+            n = input('Nome do Cliente: ')
+            e = input('Endereço do Cliente: ')
+            c = input('CPF do Cliente: ')
+            cadastrar_cliente(n, e, c)
+
         elif op == '2':
-            exibir_cliente()
+            exibir_clientes()
         elif op == '3':
             pesquisar_cliente()
         elif op == '4':
