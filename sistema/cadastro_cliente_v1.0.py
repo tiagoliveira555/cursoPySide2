@@ -47,10 +47,10 @@ def excluir_cliente(cpf):
     print('EXCLUIDO >>>>>>\n')
 
     c = pesquisar_cliente(cpf)
-    if c is not -1:
+    if c != -1:
         print('Tem certeza que deseja excluir?')
         print(f'Nome: {Nomes[c]} :: CPF: {Cpfs[c]}')
-        i = input('[S/N: ')
+        i = input('[S] Sim')
         if i.lower() == 's':
             del(Nomes[c])
             del(Enderecos[c])
@@ -61,9 +61,30 @@ def excluir_cliente(cpf):
     input('[ENTER] para continuar...')
 
 
-def editar_cliente():
+def editar_cliente(cpf):
     limpar_tela()
-    print('Editando....')
+    print('EDITANDO >>>>>>\n')
+    global Nomes, Enderecos, Cpfs
+    c = pesquisar_cliente(cpf)
+
+    if c != -1:
+        print(f'Nome    : {Nomes[c]}')
+        print(f'Endereço: {Enderecos[c]}')
+        print(f'CPF     : {Cpfs[c]}')
+        print('____________________________')
+        print('Digite um novo valor ou [ENTER] para permanecer o atual')
+        novo_n = input('Novo Nome: ')
+        novo_e = input('Novo Endereço: ')
+        novo_c = input('Novo CPF: ')
+
+        if novo_n != '':
+            Nomes[c] = novo_n
+        if novo_e != '':
+            Enderecos[c] = novo_e
+        if novo_c != '':
+            Cpfs[c] = novo_c
+
+    print('Dados alterados com sucesso.')
     input('[ENTER] para continuar...')
 
 
@@ -80,10 +101,10 @@ Enderecos = []
 Cpfs = []
 
 print(f'{">> SYSCAD <<":=^40}')
-# login = input('Usuário: ')
-# senha = input('Senha: ')
+login = input('Usuário: ')
+senha = input('Senha: ')
 
-if True: # validar_usuario(login, senha):
+if validar_usuario(login, senha):
     while True:
         limpar_tela()
         print('|================ MENU ================|')
@@ -122,8 +143,11 @@ if True: # validar_usuario(login, senha):
         elif op == '4':
             cpf = input('CPF do cliente: ')
             excluir_cliente(cpf)
+
         elif op == '5':
-            editar_cliente()
+            cpf = input('CPF do Cliente: ')
+            editar_cliente(cpf)
+
         else:
             print('Opção inválida!')
             input('[ENTER] para continuar...')

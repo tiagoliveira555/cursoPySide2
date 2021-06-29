@@ -1,5 +1,5 @@
 def limpar_tela():
-    print("\n" * 130)
+    print('')
 
 
 def cadastrar_cliente():
