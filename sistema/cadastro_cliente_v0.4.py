@@ -27,14 +27,31 @@ def exibir_clientes():
     input('[ENTER] para continuar...')
 
 
-def pesquisar_cliente():
-    print('Pesquisando....')
-    input('[ENTER] para continuar...')
+def pesquisar_cliente(cpf=None, nome=None):
+    global Cpfs
+    print('PESQUISANDO >>>>>\n')
+
+    if cpf in Cpfs:
+        return Cpfs.index(cpf)
+    return -1     # não encontrou o cpf
 
 
-def excluir_cliente():
-    limpar_tela()
-    print('Excluindo....')
+def excluir_cliente(cpf):
+
+    print('EXCLUIDO >>>>>>\n')
+
+    c = pesquisar_cliente(cpf)
+    if c is not -1:
+        print('Tem certeza que deseja excluir?')
+        print(f'Nome: {Nomes[c]} :: CPF: {Cpfs[c]}')
+        i = input('[S] Sim')
+        if i.lower() == 's':
+            del(Nomes[c])
+            del(Enderecos[c])
+            del(Cpfs[c])
+            print('Cliente excuído com sucesso.')
+        else:
+            print('O usuário cancelou a exclusão')
     input('[ENTER] para continuar...')
 
 
@@ -83,10 +100,21 @@ if True: # validar_usuario(login, senha):
 
         elif op == '2':
             exibir_clientes()
+
         elif op == '3':
-            pesquisar_cliente()
+            cpf = input('CPF: ')
+            c = pesquisar_cliente(cpf)
+            if c != -1:
+                print(f'Nome: {Nomes[c]}')
+                print(f'Endereço: {Enderecos[c]}')
+                print(f'CPF: {Cpfs[c]}')
+            else:
+                print('Valor não encontrado!')
+            input('[ENTER] para continuar...')
+
         elif op == '4':
-            excluir_cliente()
+            cpf = input('CPF do cliente: ')
+            excluir_cliente(cpf)
         elif op == '5':
             editar_cliente()
         else:
