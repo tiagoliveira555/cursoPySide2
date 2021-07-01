@@ -4,7 +4,6 @@ from termcolor import colored
 from prettytable import PrettyTable
 from progressbar import ProgressBar
 from time import sleep
-from getpass import getpass
 
 def limpar_tela():
     os.system('clear')
@@ -124,7 +123,7 @@ loading()
 
 print(colored(f'{">> SYSCAD <<":=^40}', "green"))
 login = input('Usuário: ')
-senha = getpass('Senha: ')
+senha = input('Senha: ')
 
 if validar_usuario(login, senha):
     while True:

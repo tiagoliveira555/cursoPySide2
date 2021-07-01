@@ -1,5 +1,8 @@
 import os
 
+from termcolor import colored
+from prettytable import PrettyTable
+
 
 def limpar_tela():
     os.system('clear')
@@ -23,11 +26,11 @@ def exibir_clientes():
     limpar_tela()
     print('RELATÓRIO >>>>>\n')
 
+    t = PrettyTable(['NOME', 'ENDEREÇO', 'CPF'])
     for p in range(len(Nomes)):
-        print(f'Nome     : {Nomes[p]}')
-        print(f'Endereços: {Enderecos[p]}')
-        print(f'CPF      : {Cpfs[p]}')
-        print('________________________________________')
+        t.add_row([Nomes[p], Enderecos[p], Cpfs[p]])
+
+    print(t)
 
     input('[ENTER] para continuar...')
 
@@ -43,14 +46,13 @@ def pesquisar_cliente(cpf=None, nome=None):
 
 
 def excluir_cliente(cpf):
-    limpar_tela()
-    print('EXCLUIDO >>>>>>\n')
-
     c = pesquisar_cliente(cpf)
+    print(colored('EXCLUIDO >>>>>>\n', 'red'))
+
     if c != -1:
-        print('Tem certeza que deseja excluir?')
+        print(colored('Tem certeza que deseja excluir?', 'yellow', 'on_red'))
         print(f'Nome: {Nomes[c]} :: CPF: {Cpfs[c]}')
-        i = input('[S] Sim')
+        i = input('[S/N]: ')
         if i.lower() == 's':
             del(Nomes[c])
             del(Enderecos[c])
@@ -93,6 +95,23 @@ def validar_usuario(us, pw):
         return True
 
     return False
+
+
+def exibir_menu():
+    print('|================ MENU ================|')
+    menu_principal = PrettyTable(['OPÇÃO', 'ITEM'])
+    menu_principal.align['ITEM'] = 'l' # L de Left
+    menu_principal.add_row(['1', 'CADASTRAR                   '])
+    menu_principal.add_row(['2', 'RELATÓRIO'])
+    menu_principal.add_row(['3', 'PESQUISAR'])
+    menu_principal.add_row(['4', 'EXCLUIR'])
+    menu_principal.add_row(['5', 'EDITAR'])
+
+
+    
+    menu_principal.add_row(['0', 'SAIR'])
+
+    print(menu_principal)
 # ====================================================
 
 
@@ -100,20 +119,15 @@ Nomes = []
 Enderecos = []
 Cpfs = []
 
-print(f'{">> SYSCAD <<":=^40}')
+print(colored(f'{">> SYSCAD <<":=^40}', "green"))
 login = input('Usuário: ')
 senha = input('Senha: ')
 
 if validar_usuario(login, senha):
     while True:
         limpar_tela()
-        print('|================ MENU ================|')
-        print('| [1] - CADASTRAR                      |')
-        print('| [2] - RELATORIO                      |')
-        print('| [3] - PESQUISAR                      |')
-        print('| [4] - EXCLUIR                        |')
-        print('| [5] - EDITAR                         |')
-        print('| [0] - SAIR                           |')
+        exibir_menu()
+
         op = input('> ')
 
         if op == '0':
