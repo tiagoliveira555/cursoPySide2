@@ -3,8 +3,8 @@ import mysql.connector
 def conecta_ao_banco(banco):
     conexao = mysql.connector.connect(
         host='localhost',
-        user='syscad',
-        passwd='syscad',
+        user='admin',
+        passwd='admin',
         db = banco
     )
 

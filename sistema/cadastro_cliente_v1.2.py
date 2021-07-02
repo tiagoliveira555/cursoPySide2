@@ -48,6 +48,7 @@ def excluir_cliente(cpf):
     print(colored('EXCLUIDO >>>>>>\n', 'red'))
 
     if c != -1:
+        limpar_tela()
         print(colored('Tem certeza que deseja excluir?', 'yellow', 'on_red'))
         print(f'Nome: {Nomes[c]} :: CPF: {Cpfs[c]}')
         i = input('[S/N]: ')
