@@ -1,11 +1,12 @@
 import view_login as vl
+import principal as p
 
 import sys
 
 def carrega_sistema():
     logou = vl.executa()
     if logou: # if logou == True:
-        print('abre a parte principal do sistema')
+        p.executa()
 
 
 carrega_sistema()

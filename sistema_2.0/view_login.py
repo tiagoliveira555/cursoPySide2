@@ -64,7 +64,7 @@ class Window(QWidget):
         self.setWindowIcon(appIcon)
 
     def validar_login(self):
-        global tentativas
+        global tentativas, logou
 
         us = txt_usuario.text()
         pw = txt_senha.text()
