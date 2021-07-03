@@ -1,4 +1,5 @@
-from PySide2.QtWidgets  import QApplication, QWidget, QPushButton, QFrame
+from PySide2.QtWidgets  import (QApplication, QWidget, QPushButton, QFrame,
+QLabel, QLineEdit, QTableView)
 from PySide2.QtGui import QFont
 
 import sys
@@ -53,6 +54,31 @@ class Window(QWidget):
         self.frm_cadastro.setStyleSheet('background-color: white')
         self.frm_cadastro.setVisible(False)
 
+        self.lbl_nome = QLabel('Nome', self.frm_cadastro)
+        self.lbl_nome.setGeometry(15, 50, 60, 16)
+
+        self.lbl_end = QLabel('Endereço', self.frm_cadastro)
+        self.lbl_end.setGeometry(15, 90, 60, 16)
+
+        self.lbl_cpf = QLabel('CPF', self.frm_cadastro)
+        self.lbl_cpf.setGeometry(15, 130, 60, 16)
+
+        self.txt_nome = QLineEdit(self.frm_cadastro)
+        self.txt_nome.setGeometry(80, 50, 750, 22)
+
+        self.txt_end = QLineEdit(self.frm_cadastro)
+        self.txt_end.setGeometry(80, 90, 750, 22)
+
+        self.txt_cpf = QLineEdit(self.frm_cadastro)
+        self.txt_cpf.setGeometry(80, 130, 120, 22)
+
+        self.btn_limpar = QPushButton('Limpar', self.frm_cadastro)
+        self.btn_limpar.setGeometry(20, 520, 115, 22)
+
+        self.btn_gravar = QPushButton('Gravar', self.frm_cadastro)
+        self.btn_gravar.setGeometry(710, 520, 115, 22)
+
+
         '''
         FRAME DE PESQUISAR ===========================================
         Frame não visível e só aparece quando clico no botão Pesquisar
@@ -61,8 +87,17 @@ class Window(QWidget):
         global frm_pesquisar
         self.frm_pesquisar = QFrame(self)
         self.frm_pesquisar.setGeometry(170, 0, 854, 576)
-        self.frm_pesquisar.setStyleSheet('background-color: yellow')
+        self.frm_pesquisar.setStyleSheet('background-color: white')
         self.frm_pesquisar.setVisible(False)
+
+        self.lbl_nome = QLabel('Nome', self.frm_pesquisar)
+        self.lbl_nome.setGeometry(15, 50, 55, 16)
+
+        self.txt_nome = QLineEdit(self.frm_pesquisar)
+        self.txt_nome.setGeometry(80, 50, 600, 22)
+
+        self.btn_pesquisar = QPushButton('Pesquisar', self.frm_pesquisar)
+        self.btn_pesquisar.setGeometry(710, 50, 80, 22)
 
         '''
         FRAME DE RELATORIO ===========================================
@@ -72,8 +107,13 @@ class Window(QWidget):
         global frm_relatorio
         self.frm_relatorio = QFrame(self)
         self.frm_relatorio.setGeometry(170, 0, 854, 576)
-        self.frm_relatorio.setStyleSheet('background-color: green')
-        self.frm_relatorio.setVisible(False)
+        self.frm_relatorio.setStyleSheet('background-color: white')
+        #self.frm_relatorio.setVisible(False)
+
+        self.tabela = QTableView(self.frm_relatorio)
+        self.tabela.setGeometry(15, 20, 820, 540)
+
+
 
         '''
         FRAME DE EDITAR ===========================================
@@ -83,8 +123,38 @@ class Window(QWidget):
         global frm_editar
         self.frm_editar = QFrame(self)
         self.frm_editar.setGeometry(170, 0, 854, 576)
-        self.frm_editar.setStyleSheet('background-color: red')
+        self.frm_editar.setStyleSheet('background-color: white')
         self.frm_editar.setVisible(False)
+
+        self.campo_busca = QLineEdit(self.frm_editar)
+        self.campo_busca.setGeometry(15, 15, 110, 22)
+        self.campo_busca.setPlaceholderText('000.000.000-00')
+
+        self.lbl_nome_edit = QLabel('Nome', self.frm_editar)
+        self.lbl_nome_edit.setGeometry(15, 50, 60, 16)
+
+        self.lbl_end_edit = QLabel('Endereço', self.frm_editar)
+        self.lbl_end_edit.setGeometry(15, 90, 60, 16)
+
+        self.lbl_cpf_edit = QLabel('CPF', self.frm_editar)
+        self.lbl_cpf_edit.setGeometry(15, 130, 60, 16)
+
+        self.txt_nome_edit = QLineEdit(self.frm_editar)
+        self.txt_nome_edit.setGeometry(80, 50, 750, 22)
+
+        self.txt_end_edit = QLineEdit(self.frm_editar)
+        self.txt_end_edit.setGeometry(80, 90, 750, 22)
+
+        self.txt_cpf_edit = QLineEdit(self.frm_editar)
+        self.txt_cpf_edit.setGeometry(80, 130, 750, 22)
+
+        self.btn_gravar_edit = QPushButton('Gravar', self.frm_editar)
+        self.btn_gravar_edit.setGeometry(710, 520, 115, 22)
+
+
+        '''
+        ============================================================
+        '''
 
         global meus_frames
         self.meus_frames = (self.frm_cadastro, self.frm_pesquisar,
