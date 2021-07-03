@@ -1,4 +1,4 @@
-from PySide2.QtWidgets  import QApplication, QWidget, QPushButton
+from PySide2.QtWidgets  import QApplication, QWidget, QPushButton, QFrame
 from PySide2.QtGui import QFont
 
 import sys
@@ -9,7 +9,7 @@ class Window(QWidget):
         super().__init__()
 
         self.setWindowTitle('Syscad :: Janela Principal')
-        self.setGeometry(300,300,1000,700)
+        self.setGeometry(200, 150, 1024, 576)
         self.setStyleSheet('background-color: rgb(7, 104, 114)')
 
         self.define_formulario()
@@ -42,17 +42,85 @@ class Window(QWidget):
         self.btn_editar.setStyleSheet('color: white')
         self.btn_editar.clicked.connect(self.exibir_frame_editar)
 
+        '''
+        FRAME DE CADASTRO ===========================================
+        Frame não visível e só aparece quando clico no botão Cadastrar
+        '''
+
+        global frm_cadastro
+        self.frm_cadastro = QFrame(self)
+        self.frm_cadastro.setGeometry(170, 0, 854, 576)
+        self.frm_cadastro.setStyleSheet('background-color: white')
+        self.frm_cadastro.setVisible(False)
+
+        '''
+        FRAME DE PESQUISAR ===========================================
+        Frame não visível e só aparece quando clico no botão Pesquisar
+        '''
+
+        global frm_pesquisar
+        self.frm_pesquisar = QFrame(self)
+        self.frm_pesquisar.setGeometry(170, 0, 854, 576)
+        self.frm_pesquisar.setStyleSheet('background-color: yellow')
+        self.frm_pesquisar.setVisible(False)
+
+        '''
+        FRAME DE RELATORIO ===========================================
+        Frame não visível e só aparece quando clico no botão Relatório
+        '''
+
+        global frm_relatorio
+        self.frm_relatorio = QFrame(self)
+        self.frm_relatorio.setGeometry(170, 0, 854, 576)
+        self.frm_relatorio.setStyleSheet('background-color: green')
+        self.frm_relatorio.setVisible(False)
+
+        '''
+        FRAME DE EDITAR ===========================================
+        Frame não visível e só aparece quando clico no botão Editar
+        '''
+
+        global frm_editar
+        self.frm_editar = QFrame(self)
+        self.frm_editar.setGeometry(170, 0, 854, 576)
+        self.frm_editar.setStyleSheet('background-color: red')
+        self.frm_editar.setVisible(False)
+
+        global meus_frames
+        self.meus_frames = (self.frm_cadastro, self.frm_pesquisar,
+                            self.frm_relatorio, self.frm_editar)
+
+
+    def ocultar_frames(self):
+        global meus_frames
+        for f in self.meus_frames:
+            if f.isVisible() == True:
+                f.setVisible(False)
+
+
     def exibir_frame_cadastro(self):
-        print('Cadastrar')
+        global frm_cadastro
+        self.ocultar_frames()
+        self.frm_cadastro.setVisible(True)
+
 
     def exibir_frame_pesquisa(self):
-        print('Pesquisar')
+        global frm_pesquisar
+        self.ocultar_frames()
+        self.frm_pesquisar.setVisible(True)
+
 
     def exibir_frame_relatorio(self):
-        print('Relatório')
+        global frm_relatorio
+        self.ocultar_frames()
+        self.frm_relatorio.setVisible(True)
+
 
     def exibir_frame_editar(self):
-        print('Editar')
+        global frm_editar
+        self.ocultar_frames()
+        self.frm_editar.setVisible(True)
+
 
 def executa():
     myApp = QApplication.instance()
