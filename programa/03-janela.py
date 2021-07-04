@@ -14,7 +14,7 @@ class Window(QWidget):
         self.setMaximumHeight(900)
         self.setMaximumWidth(1000)
         self.setToolTip('Janela de Login')
-        
+
         self.setAutoFillBackground(True)
         self.setStyleSheet('background-color: #00bfff;')
 

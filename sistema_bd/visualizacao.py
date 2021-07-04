@@ -7,8 +7,8 @@ print(c.exibir_clientes())
 
 print('=============================================================')
 
-#print(c.pesquisar_cliente(cpf=888))
+print(c.pesquisar_cliente(cpf=123))
 
 print('=============================================================')
 
-c.excluir_clientes('123')
+#c.excluir_clientes('123')

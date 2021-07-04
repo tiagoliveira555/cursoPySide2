@@ -1,6 +1,9 @@
 from PySide2.QtWidgets  import (QApplication, QWidget, QPushButton, QFrame,
-QLabel, QLineEdit, QTableView)
+QLabel, QLineEdit, QTableView, QHeaderView)
 from PySide2.QtGui import QFont
+
+from modelo import CustomTableModel
+import banco as b
 
 import sys
 
@@ -108,11 +111,21 @@ class Window(QWidget):
         self.frm_relatorio = QFrame(self)
         self.frm_relatorio.setGeometry(170, 0, 854, 576)
         self.frm_relatorio.setStyleSheet('background-color: white')
-        #self.frm_relatorio.setVisible(False)
+        self.frm_relatorio.setVisible(False)
+
+        dados = b.consulta()
+        self.modelo = CustomTableModel(dados)
 
         self.tabela = QTableView(self.frm_relatorio)
         self.tabela.setGeometry(15, 20, 820, 540)
+        self.tabela.setModel(self.modelo)
+        self.tabela.setColumnWidth(0, 50)
+        self.tabela.setColumnWidth(1, 300)
+        self.tabela.setColumnWidth(2, 300)
 
+        self.titulos = self.tabela.horizontalHeader()
+        self.titulos.setSectionResizeMode(QHeaderView.Interactive)
+        self.titulos.setStretchLastSection(True)
 
 
         '''
@@ -201,6 +214,3 @@ def executa():
     window.show()
 
     myApp.exec_()
-
-
-executa()
